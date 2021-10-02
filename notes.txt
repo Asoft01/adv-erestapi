@@ -94,3 +94,8 @@ php artisan passport:client
 php artisan passport:client 
 
 php artisan vendor:publish --tag=passport-components
+
+
+
+###################################### For ease of searching ########################### such as http://127.0.0.1:1400/transactions/4/categories
+the figure 4 shows that we are searching the transaction id with 4 which gives a result with product id 387, use this to search in the pivot table
