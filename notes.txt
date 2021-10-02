@@ -1,2 +1,96 @@
-php artisan db:seed
-php artisan migrate:refresh
+composer require "laravel/homestead=~5.1"
+
+config\app.php
+
+The web.php and api.php are mapped in app\Providers\RouteServiceProvider.php
+
+php artisan make:model Buyer
+php artisan make:model Seller
+php artisan make:model Category -m
+php artisan make:model Product -m 
+php artisan make:model Transaction -m 
+php artisan make:controller User/UserController -r
+php artisan make:controller Buyer/BuyerController -r
+php artisan make:controller Seller/SellerController -r
+php artisan make:controller Product/ProductController -r
+php artisan make:controller Category/CategoryController -r
+php artisan make:controller Transaction/TransactionController -r
+
+php artisan make:migration --help
+
+
+The character set under the database.php is upgraded from utf8 to utf8mb4 in order to support some characters sets and emoticons in the database 
+hence upgrading it in Schema::defaultStringLength(191) because mysql only supports 767 
+'charset' => 'utf8mb4',
+
+This calculation can be done by multiplying 255*4 = 1040,
+767/4 = 191 for utf8mb4
+
+Pivot Table
+php artisan make:migration category_product_table --create=category_product
+
+php artisan migrate:refresh --seed
+
+database\seeds\DatabaseSeeder.php
+
+php artisan migrate:refresh --seed
+
+
+
+//////////////// In order to use the category model (Implicit Model Binding) /////////////////////
+php artisan make:controller Category/CategoryController -r -m Category
+
+php artisan make:controller Category/CategoryProductController -r -m Category
+
+I use bellow code in composer.json and it works.
+
+ "guzzlehttp/guzzle": "^4.2.4",
+
+then comoser update
+
+
+        "laravel/passport": "^2.0",
+
+check mail.php and services.php and configure the .env file
+
+php artisan make:mail UserCreated
+
+
+Everytime you change your .env file, you need tor restart the server for the new options to take effect.
+
+Or clear and cache your configuration with
+
+php artisan config:cache
+
+php artisan make:mail Test -m emails.test
+
+php artisan make:middleware Signaturemiddleware
+
+composer require spatie/laravel-fractal 4.5.0
+
+php artisan vendor:publish --provider="Spatie\Fractal\FractalServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Laravel\Tinker\TinkerServiceProvider" --tag="migrations"
+
+The below code can be found in illuminate router
+
+// Authentication Routes...
+$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('login', 'Auth\LoginController@login');
+$this->post('logout', 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+$this->get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post('register', 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+$this->post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
+
+php artisan passport:client
+php artisan passport:client 
+
+php artisan vendor:publish --tag=passport-components

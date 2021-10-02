@@ -23,10 +23,16 @@ use App\Seller;
         return $this->showAll($sellers);
     }
 
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $seller = Seller::has('products')->findorFail($id);
+    //     // return response()->json(['data'=> $seller], 200);
+    //     return $this->showOne($seller);
+    // }
+
+    public function show(Seller $seller)
     {
-        $seller = Seller::has('products')->findorFail($id);
-        // return response()->json(['data'=> $seller], 200);
         return $this->showOne($seller);
     }
+
 }

@@ -64,11 +64,16 @@ use App\User;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $user = User::findOrFail($id);
+    // public function show($id)
+    // {
+    //     $user = User::findOrFail($id);
 
-        // return response()->json(['data' => $user], 200);
+    //     // return response()->json(['data' => $user], 200);
+    //     return $this->showOne($user);
+    // }
+
+    public function show(User $user)
+    {
         return $this->showOne($user);
     }
 
@@ -79,10 +84,50 @@ use App\User;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
+    // public function update(Request $request, $id)
+    // {
+    //     $user = User::findOrFail($id);
 
+    //     $rules = [
+    //         'email' => 'email|unique:users',
+    //         'password' => 'min:6|confirmed',
+    //         'admin' => 'in:' . User::ADMIN_USER . ',' . User::REGULAR_USER,
+    //     ];
+
+    //     if($request->has('name')){
+    //         $user->name = $request->name;
+    //     }
+
+    //     if($request->has('email') && $user->email != $request->email){
+    //         $user->verified = User::UNVERIFIED_USER;
+    //         $user->verification_token = User::generateVerificationCode();
+    //         $user->email = $request->email;
+    //     }
+
+    //     if($request->has('password')){
+    //         $user->password = bcrypt($request->password);
+    //     }
+
+    //     if($request->has('admin')){
+    //         if(!$user->isVerified()){
+    //             // return response()->json(['error' => 'Only Verified users can modify the admin field', 'code' => 409], 409);
+    //             return $this->errorResponse('Only Verified users can modify the admin field', 409);
+    //         }
+
+    //         $user->admin = $request->admin;
+    //     }
+
+    //     if(!$user->isDirty()){
+    //         // return response()->json(['error'=> 'You need to specify a different value to update', 'code' => 422], 422);
+    //         return $this->errorResponse('You need to specify a different value to update', 422);
+    //     }
+    //     $user->save();
+    //     // return response()->json(['data' => $user], 200);
+    //     return $this->showOne($user);
+    // }
+
+    public function update(Request $request, User $user)
+    {
         $rules = [
             'email' => 'email|unique:users',
             'password' => 'min:6|confirmed',
@@ -127,10 +172,8 @@ use App\User;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $user = User::findOrFail($id);
-        
+    public function destroy(User $user)
+    {   
         $user->delete();
         // return response()->json(['data' => $user], 200);
         return $this->showOne($user);

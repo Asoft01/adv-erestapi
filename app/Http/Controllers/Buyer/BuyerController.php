@@ -23,10 +23,17 @@ use App\Http\Controllers\Controller;
         return $this->showAll($buyers);
     }
 
-  
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $buyer = Buyer::has('transactions')->findOrFail($id);
+
+    //     // return response()->json(['data' => $buyer], 200);
+    //     return $this->showOne($buyer);
+    // }
+
+    public function show(Buyer $buyer)
     {
-        $buyer = Buyer::has('transactions')->findOrFail($id);
+        // $buyer = Buyer::has('transactions')->findOrFail($id);
 
         // return response()->json(['data' => $buyer], 200);
         return $this->showOne($buyer);
