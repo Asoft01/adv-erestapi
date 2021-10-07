@@ -16,6 +16,7 @@ class CategorySellerController extends ApiController
      */
     public function index(Category $category)
     {
+        // There is possibility there exists several products with the same seller in this category, hence we use the unique and values to rebuild the index of this collection
         $sellers = $category->products()
                   ->with('seller')
                   ->get()
@@ -23,6 +24,7 @@ class CategorySellerController extends ApiController
                   ->unique()
                   ->values();
 
-                  return $this->showAll($sellers);
+        return $this->showAll($sellers);
+
     }
 }

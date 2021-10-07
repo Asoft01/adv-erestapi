@@ -23,10 +23,11 @@ class BuyerSellerController extends ApiController
         
          $sellers = $buyer->transactions()->with('product.seller')
                     ->get()
+                    // ->pluck('seller') /*********This returns an empty results because the seller is inside the product element just like "product":{"seller": {"id": 1, name:"Adele".....}} *************/
                     ->pluck('product.seller')
                     ->unique('id')
                     ->values();
-
+                
         return $this->showAll($sellers);
     }
 }

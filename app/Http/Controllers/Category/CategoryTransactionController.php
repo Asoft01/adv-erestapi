@@ -16,8 +16,8 @@ class CategoryTransactionController extends ApiController
      */
     public function index(Category $category)
     {
-        // The where has is used to pull out on the the products that has at least one transaction because there is possibility for some of them 
-        // not to have transaction
+        // The where has is used to pull out on the the products that has at least one transaction because there is possibility for some of them not to have transaction
+        // Collapse is used to take all the collections into only one
         $transactions = $category->products()
                         ->whereHas('transactions')
                         ->with('transactions')
@@ -25,7 +25,5 @@ class CategoryTransactionController extends ApiController
                         ->pluck('transactions')
                         ->collapse();
         return $this->showAll($transactions);
-
-
     }
 }

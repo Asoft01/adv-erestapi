@@ -23,6 +23,7 @@ class BuyerCategoryController extends ApiController
         //              ->get()
         //              ->pluck('product.categories')
 
+        // unique is used to for unique categories coz there may b repeated categories
         $categories = $buyer->transactions()
                       ->with('product.categories')
                       ->get()
@@ -31,7 +32,6 @@ class BuyerCategoryController extends ApiController
                      ->unique('id')
                      ->values();
         return $this->showAll($categories);
-
         // $sellers = $buyer->transactions()->with('product.seller')
 
     }

@@ -25,6 +25,7 @@ class BuyerProductController extends ApiController
 
         ////////////// Second Method to fetch the product itself ///////////////////
         // N.B First Search through the products and 
+        /////////////// $buyer->transactions()->with('product')->get() is used to pull out the transactions and product only 
         $products = $buyer->transactions()->with('product')
                    ->get()
                    ->pluck('product');
