@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 // use Illuminate\Foundation\Testing\HttpException;
@@ -95,7 +96,12 @@ class SellerProductController extends ApiController
             }
         }
 
+        if($request->hasFile('image')){
+            Storage::delete($product->image);
 
+            $product->image = $request->image->store('');
+        }
+        
         // When something does not change
        
         if($product->isClean()){
@@ -118,6 +124,8 @@ class SellerProductController extends ApiController
         $this->checkSeller($seller, $product);
 
         $product->delete();
+
+        Storage::delete($product->image);
 
         return $this->showOne($product);
 

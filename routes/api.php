@@ -39,6 +39,7 @@ Route::resource('products', 'Product\ProductController', ['only' => ['index', 's
 Route::resource('products.transactions', 'Product\ProductTransactionController', ['only' => ['index']]);
 Route::resource('products.categories', 'Product\ProductCategoryController', ['only' => ['index', 'update', 'destroy']]);
 Route::resource('products.buyers', 'Product\ProductBuyerController', ['only' => ['index']]);
+Route::resource('products.sellers', 'Product\ProductSellerController', ['only' => ['index']]);
 Route::resource('products.buyers.transactions', 'Product\ProductBuyerTransactionController', ['only' => ['store']]);
 
 // Sellers
@@ -55,3 +56,4 @@ Route::resource('transactions.sellers', 'Transaction\TransactionSellerController
 
 // Users
 Route::resource('users', 'User\UserController', ['except' => ['create', 'edit']]);
+Route::name('verify')->get('users/verify/{token}', 'User\UserController@verify');

@@ -41,7 +41,8 @@ class User extends Authenticatable
 
      // The hidden attribute is used to hide what is to be displayed in an array
     protected $hidden = [
-        'password', 'remember_token', 'verification_token'
+        'password', 'remember_token', 
+        'verification_token'
     ];
 
     public function setNameAttribute($name){

@@ -105,3 +105,15 @@ composer update
 "phpunit/phpunit-selenium": "^4.0",
 
 $ composer update
+
+Notes:Method Spoofing according to 26,4 (4. Updating the Image When Editing a product) helps to specify the kinda method you want to use 
+in the API 
+
+
+composer require guzzlehttp/guzzle
+
+NB: You need to edit services.php 
+config\mail.php
+C:\xampp20\htdocs\adv-erestapi\config\services.php
+
+27.3 php artisan make:mail UserCreated
