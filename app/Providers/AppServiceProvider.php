@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 use App\Product;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -20,10 +21,30 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        // Before using the retry helper method
+        // User::created(function($user){
+        //     Mail::to($user)->send(new UserCreated($user));
+        //  });
+ 
+        //  User::updated(function($user){
+        //      if($user->isDirty('email')){
+        //          Mail::to($user)->send(new UserMailChanged($user));   
+        //      }
+        //   }); 
+ 
         User::created(function($user){
-           Mail::to($user)->send(new UserCreated($user));
+           retry(5, function() use ($user){ 
+               Mail::to($user)->send(new UserCreated($user));
+           }, 100);
         });
 
+        User::updated(function($user){
+            if($user->isDirty('email')){
+                retry(5, function() use ($user){ 
+                    Mail::to($user)->send(new UserMailChanged($user));   
+                }, 100);
+            }
+         }); 
 
         Product::updated(function($product){
             if($product->quantity == 0 && $product->isAvailable()){

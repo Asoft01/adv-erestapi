@@ -8,12 +8,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserCreated extends Mailable
+class UserMailChanged extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-
     /**
      * Create a new message instance.
      *
@@ -21,7 +20,7 @@ class UserCreated extends Mailable
      */
     public function __construct(User $user)
     {
-        $this->user= $user;
+        $this->user = $user;
     }
 
     /**
@@ -32,8 +31,7 @@ class UserCreated extends Mailable
     public function build()
     {
         // return $this->view('view.name');
-        // return $this->text('emails.welcome')->with(['user'=> $user]);
-        // return $this->text('emails.welcome');
-        return $this->markdown('emails.welcome')->subject('please confirm your account');
+        // return $this->view('emails.confirm')->subject('please confirm your new email');
+        return $this->markdown('emails.confirm')->subject('please confirm your new email');
     }
 }

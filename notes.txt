@@ -117,3 +117,6 @@ config\mail.php
 C:\xampp20\htdocs\adv-erestapi\config\services.php
 
 27.3 php artisan make:mail UserCreated
+ php artisan make:mail UserMailChanged
+
+ php artisan make:mail Test -m emails.test
