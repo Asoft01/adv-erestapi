@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Product;
 use League\Fractal\TransformerAbstract;
 
 class ProductTransformer extends TransformerAbstract
@@ -24,7 +25,6 @@ class ProductTransformer extends TransformerAbstract
             'creationDate' => $product->created_at,
             'lastChange' => $product->updated_at,
             'deletedDate' => isset($product->deleted_at) ? (string) $product->deleted_at : null,
-            
         ];
     }
 }
