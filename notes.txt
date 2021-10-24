@@ -120,3 +120,11 @@ C:\xampp20\htdocs\adv-erestapi\config\services.php
  php artisan make:mail UserMailChanged
 
  php artisan make:mail Test -m emails.test
+
+ 
+vendor\laravel\framework\src\Illuminate\Routing\Router.php
+
+To check if the token is matched you need to go to app\Exceptions\Handler.php 
+ if($exception instanceof TokenMismatchException){
+        return redirect()->back()->withInput($request->input());
+}
