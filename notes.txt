@@ -128,3 +128,12 @@ To check if the token is matched you need to go to app\Exceptions\Handler.php
  if($exception instanceof TokenMismatchException){
         return redirect()->back()->withInput($request->input());
 }
+
+
+"guzzlehttp/guzzle": "~6.0",
+"laravel/passport": "~4.0",
+
+composer update
+php artisan migrate
+php artisan passport:install
+
