@@ -11,9 +11,12 @@ use App\Seller;
 // {
     class SellerController extends ApiController
     {
+    
+    // The ApiController is the base controller where the secured middleware resides 
     public function __construct()
     {
         parent::__construct();
+        $this->middleware('scope:read-general')->only('show');
     }
     
     /**
