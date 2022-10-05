@@ -39,7 +39,6 @@ $factory->define(Category::class, function (Faker\Generator $faker) {
     ];
 });
 
-
 $factory->define(Product::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
@@ -51,8 +50,6 @@ $factory->define(Product::class, function (Faker\Generator $faker) {
         // User::inRandomOrder()->first()->id
     ];
 });
-
-
 
 $factory->define(Transaction::class, function (Faker\Generator $faker) {
     // Seller has at least one product

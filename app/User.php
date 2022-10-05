@@ -33,7 +33,7 @@ class User extends Authenticatable
         'password', 
         'verified', 
         'verification_token', 
-        'admin'
+        'admin', 
     ];
 
     /**
@@ -44,7 +44,8 @@ class User extends Authenticatable
 
      // The hidden attribute is used to hide what is to be displayed in an array
     protected $hidden = [
-        'password', 'remember_token', 
+        'password',
+        'remember_token', 
         'verification_token'
     ];
 
@@ -59,6 +60,7 @@ class User extends Authenticatable
     public function setEmailAttribute($email){
         $this->attributes['email'] = strtolower($email);
     }
+
 
     public function isVerified(){
         return $this->verified == User::VERIFIED_USER;
